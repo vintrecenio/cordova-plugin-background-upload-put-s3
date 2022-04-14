@@ -339,47 +339,10 @@ public final class UploadTask extends Worker {
         File file = new File(filepath);
         ProgressRequestBody fileRequestBody = new ProgressRequestBody(mediaType, file.length(), new FileInputStream(file), this::handleProgress);
 
-        // Build body
-        final MultipartBody.Builder bodyBuilder = new MultipartBody.Builder();
-
-        // With the parameters
-        final int parametersCount = getInputData().getInt(KEY_INPUT_PARAMETERS_COUNT, 0);
-        if (parametersCount > 0) {
-            final String[] parameterNames = getInputData().getStringArray(KEY_INPUT_PARAMETERS_NAMES);
-            assert parameterNames != null;
-
-            for (int i = 0; i < parametersCount; i++) {
-                final String key = parameterNames[i];
-                final Object value = getInputData().getKeyValueMap().get(KEY_INPUT_PARAMETER_VALUE_PREFIX + i);
-
-                bodyBuilder.addFormDataPart(key, value.toString());
-            }
-        }
-
-        bodyBuilder.addFormDataPart(fileKey, filepath, fileRequestBody);
-
-        // Start build request
-        String method = getInputData().getString(KEY_INPUT_HTTP_METHOD);
-        if (method == null) {
-            method = "PUT";
-        }
-        Request.Builder requestBuilder = new Request.Builder()
+        return new Request.Builder()
                 .url(url)
-                .method(method.toUpperCase(), bodyBuilder.build());
-
-        // Write headers
-        final int headersCount = getInputData().getInt(KEY_INPUT_HEADERS_COUNT, 0);
-        final String[] headerNames = getInputData().getStringArray(KEY_INPUT_HEADERS_NAMES);
-        assert headerNames != null;
-        for (int i = 0; i < headersCount; i++) {
-            final String key = headerNames[i];
-            final Object value = getInputData().getKeyValueMap().get(KEY_INPUT_HEADER_VALUE_PREFIX + i);
-
-            requestBuilder.addHeader(key, value.toString());
-        }
-
-        // Ok
-        return requestBuilder.build();
+                .put(fileRequestBody)
+                .build();
     }
 
     private void handleNotification() {
