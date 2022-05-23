@@ -1,26 +1,27 @@
 
-# cordova-plugin-background-upload
+# cordova-plugin-background-upload-put-s3 (also works with capacitor)
 This plugin provides a file upload functionality that can continue to run even while the app is in background. It includes progress updates suitable for long-term transfer operations of large files.
-
-[![npm version](https://badge.fury.io/js/@spoonconsulting%2Fcordova-plugin-background-upload.svg)](https://badge.fury.io/js/@spoonconsulting%2Fcordova-plugin-background-upload)
-[![Build Status](https://travis-ci.com/spoonconsulting/cordova-plugin-background-upload.svg?branch=master)](https://travis-ci.org/spoonconsulting/cordova-plugin-background-upload)
 
 **Supported Platforms**
 - iOS
 - Android
 
+## Installation
 
-**Installation**
+### Capacitor
 
-To install the plugin:
-
+```bash
+npm install --save cordova-plugin-background-upload-put-s3 && npx cap sync
 ```
-cordova plugin add @spoonconsulting/cordova-plugin-background-upload --save
+
+### Cordova
+```bash
+cordova plugin add cordova-plugin-background-upload-put-s3 --save
 ```
 
 To uninstall this plugin:
-```
-cordova plugin rm @spoonconsulting/cordova-plugin-background-upload
+```bash
+cordova plugin rm cordova-plugin-background-upload-put-s3
 ```
 
 **Sample usage**
@@ -51,10 +52,6 @@ var payload = {
     headers: {
         api_key: "asdasdwere123sad"
     },
-    parameters: {
-        signature: "a_signature_hash",
-        timestamp: 112321321
-    }
 };
 uploader.startUpload(payload);
 ```
@@ -65,7 +62,6 @@ filePath | the absolute path for the file to upload
 fileKey | the name of the key to use for the file
 serverUrl | remote server url
 headers | custom http headers
-parameters | custom parameters for multipart data
 notificationTitle | Notification title when file is being uploaded (Android only)
 
 
@@ -138,24 +134,9 @@ The minimum API level required is 21 and the background file upload is handled b
 
 On Android 12 and above, there are strict limitations on background services that does not allow to start a Foreground Service when the app is processing in background(https://developer.android.com/guide/components/foreground-services). Hence to prevent this on Android 12 and above, we have a classic notification. On Android 11 and below, we are still using foreground service along with WorkManager to start the notification.
 
-## Migration notes for v2.0
-- When v2 of the plugin is launched on an app containing uploads still in progress from v1 version, it will mark all of them as `FAILED` with `errorCode` 500 so that they can be retried.
-- If an upload is cancelled, an event with status `FAILED` and error code `-999` will be broadcasted in the global callback. It is up to the application to properly handle cancelled callbacks.
-- v2 removes the events `success`, `error`, `progress` and instead uses a single callback for all events delivery:
-    ```javascript
-    uploader.on('event', function (event) {
-        //use event.state to handle different scenarios
-    });
-    ```
-- Events need to be acknowledged to be removed. Failure to do so will result in all saved events being broadcast on `init`.
--`showNotification` parameter has been removed (A notification will always be shown on Android during upload)
-
-
-## README for v1.0
-The README for the previous version can be found [here](https://github.com/spoonconsulting/cordova-plugin-background-upload/blob/eacce4385ae497188307a9944c2f353571a463a2/README.md).
-
 ## License
 cordova-plugin-background-upload is licensed under the Apache v2 License.
 
 ## Credits
-cordova-plugin-background-upload is brought to you by [Spoon Consulting Ltd] (http://www.spoonconsulting.com/).
+Forked from cordova-plugin-background-upload is brought to you by [Spoon Consulting Ltd] (http://www.
+spoonconsulting.com/),  adapted by [maxcodefaster](https://heichling.xyz).

@@ -1,9 +1,9 @@
 {
-  "name": "@spoonconsulting/cordova-plugin-background-upload",
+  "name": "cordova-plugin-background-upload-put-s3",
   "version": "4.0.4",
-  "description": "Cordova plugin for uploading file in the background",
+  "description": "Cordova & Capacitor plugin for uploading file in the background",
   "cordova": {
-    "id": "@spoonconsulting/cordova-plugin-background-upload",
+    "id": "cordova-plugin-background-upload-put-s3",
     "platforms": [
       "android",
       "ios"
@@ -11,9 +11,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/spoonconsulting/cordova-plugin-background-upload"
+    "url": "https://github.com/maxcodefaster/cordova-plugin-background-upload-put-s3"
   },
   "keywords": [
+    "capacitor",
     "cordova",
     "background",
     "file",
@@ -30,7 +31,7 @@
     "test:ios": "cordova-paramedic --platform ios --plugin . --cleanUpAfterRun"
   },
   "dependencies": {},
-  "author": "Mevin Dhunnooa & Spoon Consulting Ltd",
+  "author": "Mevin Dhunnooa & Spoon Consulting Ltd, Max Heichling, Benjamin Geiger",
   "contributors": [
     {
       "name": "Luc Boissaye",
@@ -65,6 +66,12 @@
       "name": "Zafir Sk Heerah",
       "email": "zafir.heerah@spoonconsulting.com",
       "url": "https://github.com/zafirskthelifehacker",
+      "hireable": true
+    },
+    {
+      "name": "Max Heichling",
+      "email": "max@heichling.xyz",
+      "url": "https://heichling.xyz",
       "hireable": true
     }
   ],

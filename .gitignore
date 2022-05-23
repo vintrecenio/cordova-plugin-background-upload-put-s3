@@ -12,6 +12,7 @@ Thumbs.db
 *.swp
 *.user
 *.vscode
+.idea
 
 node_modules
 demo/node_modules
