@@ -341,6 +341,7 @@ public final class UploadTask extends Worker {
 
         return new Request.Builder()
                 .url(url)
+                .addHeader("x-amz-acl", "public-read")
                 .put(fileRequestBody)
                 .build();
     }

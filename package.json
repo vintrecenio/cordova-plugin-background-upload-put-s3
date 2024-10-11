@@ -1,9 +1,9 @@
 {
-  "name": "cordova-plugin-background-upload-put-s3",
-  "version": "4.0.5",
+  "name": "cordova-plugin-background-upload-put-s3-with-header",
+  "version": "1.0.0",
   "description": "Cordova & Capacitor plugin for uploading file in the background",
   "cordova": {
-    "id": "cordova-plugin-background-upload-put-s3",
+    "id": "cordova-plugin-background-upload-put-s3-with-header",
     "platforms": [
       "android",
       "ios"
